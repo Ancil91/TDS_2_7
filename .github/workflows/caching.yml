@@ -15,23 +15,23 @@ jobs:
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
-      
+
       - name: Create virtual environment
         run: uv venv
 
-      - name: Cache uv dependencies
+      - name: prime-cache-72a366f  
+        id: prime-cache-72a366f    
         uses: actions/cache@v4
-        id: cache-uv # Give the step an id to check its output
         with:
           path: ~/.cache/uv
-          key: cache-72a366f
+          key: cache-72a366f       
 
       - name: Install dependencies
         run: uv pip install -r requirements.txt
 
-      - name: prime-cache-72a366f
+      - name: Report cache result
         run: |
-          if [[ "${{ steps.cache-uv.outputs.cache-hit }}" == "true" ]]; then
+          if [[ "${{ steps.prime-cache-72a366f.outputs.cache-hit }}" == "true" ]]; then
             echo "Cache hit! Dependencies were restored."
           else
             echo "Cache miss. Dependencies were installed and cache will be saved."
